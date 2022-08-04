@@ -13,15 +13,15 @@ public class NthTriangleNum {
 		int factors = 0;
 		int triangleTest = 1;
 		
-		System.out.println((findNMul2(triangleNum(20))));
+		//System.out.println((findNMul2(triangleNum(20))));
 		
-		/*while(factors <numOfMults) {
+		while(factors <numOfMults) {
 			factors = findNMul2(triangleNum(triangleTest));
 			triangleTest++;
 		}
 		triangleTest--;
 		System.out.println(triangleNum(triangleTest));
-			*/
+			
 	}
 	
 	static int triangleNum(int n) { //finds nth triangle number
