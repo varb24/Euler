@@ -1,6 +1,7 @@
 package euler14;
 
 import java.io.*;
+import java.math.BigInteger;
 
 public class LongestCollatzSequence {
 
@@ -10,57 +11,53 @@ public class LongestCollatzSequence {
 		int currentCollatz = 0;
 		int oneMillion = 1000000;
 		
-		//bruteCollatz(35655);
 		collatzOne();
 	}
 	//returns the number of times n has chained.
-	static int bruteCollatz(int n)  {
-		
-		long chainNum = n;
-		int count = 0;
-		String sequence = Integer.toString(n);
-		try{
-		PrintWriter output = new PrintWriter(new FileOutputStream("SequenceStrings.txt", true));
-		
-		while (chainNum > 1) {
-			//System.out.println(chainNum);
-			if (!((chainNum&1)==1)) {
+	static int bruteCollatz(BigInteger n)  {
 				
-				chainNum = chainNum / 2;
+		int count = 0;
+
+		
+		while (!n.equals(BigInteger.ONE)) {
+
+			if (!n.testBit(0)) {
+				
+				n = n.shiftRight(1);
 				
 			}
-			else {chainNum = (3 * chainNum) + 1;}
-			sequence+= "-->" + Long.toString(chainNum);
-			count++;
-		}
-		System.out.println(sequence);
-		output.write(sequence);
-		output.close();
-		//System.out.println(sequence);
-		return count+1;
+			else {
 
+				n = n.multiply(BigInteger.valueOf(3)).add(BigInteger.ONE);
+			
+			}
+
+			count++;
+			
 		}
-		catch(FileNotFoundException e) {
-			System.out.println("wut");
-			return -1;
-		}
+
+		return count;
+
 	}
 
 
 	static void collatzOne() {
-		int largest = 0;
+		int largestStart = 0;
+		int largestChain = 0;
 		int currentCollatz = 0;
 		int oneMillion = 1000000;
 		
-		for(int i = 0; i < oneMillion; i++) {
-			currentCollatz = bruteCollatz(i);
-			//System.out.println("I " + i + " Col " +currentCollatz);
-			if (currentCollatz >= largest) 	{
-				largest = i;
-			//System.out.println(largest);
+		
+		for(int i = 1; i < 837799+1; i++) {
+			currentCollatz = bruteCollatz(BigInteger.valueOf(i));
+
+			if (currentCollatz > largestChain) 	{
+				
+				largestStart = i;
+
 			}
 		}
-		System.out.println(largest + "  " +bruteCollatz(largest));
+		System.out.println(largestStart);
 
 	}		
 }
