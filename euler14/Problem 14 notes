@@ -1,0 +1,11 @@
+n--> n/2 (n is even)
+n --> 3n+1 (n is odd)
+
+Which starting number, under one million, produces the longest chain?
+
+NOTE: Once the chain starts the terms are allowed to go above one million.
+
+Chains seem to be duplicated, but at first glance saving the number and chain amount does not seem to be the
+best approach.
+
+I 35655 324
